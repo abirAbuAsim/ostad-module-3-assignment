@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Module 3 Assignment: Advanced JavaScript Concepts</title>
+</head>
+<body>
+  <!-- Question 1: Date Object -->
+  <script>
+    // a. Create a function that takes a date in the format "YYYY-MM-DD" as a parameter and returns the day of the week for that date.
+    function getDayOfWeek(dateString) {
+      const date = new Date(dateString);
+      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      return dayOfWeek;
+    }
+
+    // b. Implement the function to display the day of the week for the current date.
+    function displayCurrentDayOfWeek() {
+      const currentDate = new Date();
+      const dayOfWeek = getDayOfWeek(currentDate.toISOString().split('T')[0]);
+      console.log('Day of the week:', dayOfWeek);
+    }
+
+    // Usage example
+    displayCurrentDayOfWeek();
+  </script>
+
+  <!-- Question 2: Math Object -->
+  <script>
+    // a. Write a JavaScript function that takes an array of numbers as input and returns the square root of the sum of squares of all the numbers.
+    function squareRootOfSumOfSquares(numbers) {
+      const sumOfSquares = numbers.reduce((sum, number) => sum + Math.pow(number, 2), 0);
+      const squareRoot = Math.sqrt(sumOfSquares);
+      return squareRoot;
+    }
+
+    // b. Implement the function to display the square root of the sum of squares for an array of numbers.
+    function displaySquareRootOfSumOfSquares(numbers) {
+      const result = squareRootOfSumOfSquares(numbers);
+      console.log('Square root of the sum of squares:', result);
+    }
+
+    // Usage example
+    const numbers = [1, 2, 3, 4, 5];
+    displaySquareRootOfSumOfSquares(numbers);
+  </script>
+
+  <!-- Question 3: Numbers -->
+  <script>
+    // a. Write a JavaScript function that takes a positive integer as input and returns true if it is a prime number, otherwise returns false.
+    function isPrime(number) {
+      if (number <= 1) {
+        return false;
+      }
+      for (let i = 2; i <= Math.sqrt(number); i++) {
+        if (number % i === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // b. Implement the function to check if a given positive integer is a prime number.
+    function displayIsPrime(number) {
+      const result = isPrime(number);
+      console.log(number, 'is prime:', result);
+    }
+
+    // Usage example
+    const primeNumber = 17;
+    displayIsPrime(primeNumber);
+  </script>
+
+  <!-- Question 4: Window Object -->
+  <script>
+    // a. Create a function that opens a new window with a specified URL and dimensions (width and height).
+    function openNewWindow(url, width, height) {
+      window.open(url, '_blank', `width=${width},height=${height}`);
+    }
+
+    // b. Implement the function to open a new window with the URL "https://www.example.com" and dimensions 800x600.
+    function openExampleWindow() {
+      openNewWindow('https://www.example.com', 800, 600);
+    }
+
+    // Usage example
+    openExampleWindow();
+  </script>
+
+  <!-- Question 5: Navigator Object -->
+  <script>
+    // a. Write a JavaScript function that detects the user's browser name and version using the navigator object.
+    function getBrowserInfo() {
+      const browserName = navigator.userAgent;
+      const browserVersion = navigator.appVersion;
+      return { name: browserName, version: browserVersion };
+    }
+
+    // b. Implement the function to display the user's browser name and version.
+    function displayBrowserInfo() {
+      const browserInfo = getBrowserInfo();
+      console.log('Browser Name:', browserInfo.name);
+      console.log('Browser Version:', browserInfo.version);
+    }
+
+    // Usage example
+    displayBrowserInfo();
+  </script>
+
+  <!-- Question 6: Geolocation -->
+  <script>
+    // Implement a JavaScript function that retrieves the user's current location (latitude and longitude) using the geolocation API.
+    function getCurrentLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log('Latitude:', latitude);
+            console.log('Longitude:', longitude);
+          },
+          error => {
+            console.log('Error:', error.message);
+          }
+        );
+      } else {
+        console.log('Geolocation is not supported by this browser.');
+      }
+    }
+
+    // Usage example
+    getCurrentLocation();
+  </script>
+
+  <!-- Question 7: JS Common Events -->
+  <script>
+    // a. When the user clicks anywhere on the page, display an alert with the coordinates (x, y) of the click.
+    document.addEventListener('click', function(event) {
+      const x = event.clientX;
+      const y = event.clientY;
+      alert(`Clicked at (${x}, ${y})`);
+    });
+
+    // b. When the user presses any key on the keyboard, display an alert with the key code of the pressed key.
+    document.addEventListener('keydown', function(event) {
+      const keyCode = event.keyCode;
+      alert(`Key pressed: ${keyCode}`);
+    });
+
+    // c. When the user moves the mouse over an image, change the image source to another image of your choice.
+    const image = document.getElementById('image');
+    image.addEventListener('mouseover', function() {
+      image.src = 'image2.jpg';
+    });
+
+    image.addEventListener('mouseout', function() {
+      image.src = 'image1.jpg';
+    });
+  </script>
+
+  <!-- Question 8: HTML DOM Document -->
+  <script>
+    // a. Create a webpage with a button and a paragraph element.
+
+    // b. Implement a JavaScript function that changes the text content of the paragraph element to "Button Clicked!" when the button is clicked.
+    const button = document.getElementById('button');
+    const message = document.getElementById('message');
+
+    button.addEventListener('click', function() {
+      message.textContent = 'Button Clicked!';
+    });
+  </script>
+
+  <!-- Question 9: JS DOM Working with Form Input -->
+  <script>
+    // Implement a webpage with a form that has the following fields:
+    // a. Name (text input)
+    // b. Email (email input)
+    // c. Password (password input)
+    // d. Confirm Password (password input)
+    // e. Submit (button)
+
+    const form = document.getElementById('myForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirmPassword');
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+
+      let isValid = true;
+      let errorMessage = '';
+
+      if (name === '' || !/^[a-zA-Z]+$/.test(name)) {
+        isValid = false;
+        errorMessage += 'Name should not be empty and should contain only letters.\n';
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        isValid = false;
+        errorMessage += 'Invalid email address.\n';
+      }
+
+      if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password)) {
+        isValid = false;
+        errorMessage += 'Password should have a minimum length of 8 characters and contain at least one uppercase letter, one lowercase letter, and one digit.\n';
+      }
+
+      if (confirmPassword !== password) {
+        isValid = false;
+        errorMessage += 'Confirm Password should match the Password field.\n';
+      }
+
+      if (isValid) {
+        // Submit the form or perform further actions
+        console.log('Form submitted successfully!');
+      } else {
+        // Display error messages
+        alert(errorMessage);
+      }
+    });
+  </script>
+
+  <!-- Question 10: DOM Manipulate CSS Class -->
+  <script>
+    // a. Create a webpage with a button and a paragraph element.
+    // b. Implement a JavaScript function that adds a CSS class named "highlight" to the paragraph element when the button is clicked.
+    //    The "highlight" class should change the background color of the paragraph to yellow.
+    const button = document.getElementById('button');
+    const paragraph = document.getElementById('paragraph');
+
+    button.addEventListener('click', function() {
+      paragraph.classList.add('highlight');
+    });
+  </script>
+
+  <!-- Question 11: Create Element & Append Element -->
+  <script>
+    // a. Create a webpage with an empty unordered list (<ul>).
+    // b. Implement a JavaScript function that dynamically creates five list items (<li>) with sequential numbers (1 to 5) and appends them to the unordered list.
+    const ul = document.querySelector('ul');
+
+    for (let i = 1; i <= 5; i++) {
+      const li = document.createElement('li');
+      li.textContent = i;
+      ul.appendChild(li);
+    }
+  </script>
+
+  <!-- Question 12: DOM Change Attribute Value -->
+  <script>
+    // a. Create a webpage with an image element (<img>) that has an initial source URL.
+    // b. Implement a JavaScript function that changes the source URL of the image element when a button is clicked.
+    //    Use a different image URL of your choice.
+    const image = document.getElementById('image');
+    const button = document.getElementById('button');
+
+    button.addEventListener('click', function() {
+      image.src = 'new-image.jpg';
+    });
+  </script>
+
+  <!-- Question 13: DOM Query Selector -->
+  <script>
+    // a. Create a webpage with multiple paragraphs containing different classes and IDs.
+    // b. Implement a JavaScript function that selects all paragraphs with a specific class and changes their text color to red.
+    const paragraphs = document.querySelectorAll('.my-paragraph');
+
+    paragraphs.forEach(paragraph => {
+      paragraph.style.color = 'red';
+    });
+  </script>
+
+  <!-- Question 14: AJAX Get Request -->
+  <script>
+    // a. Implement a JavaScript function that sends an AJAX GET request to the following URL: "https://api.example.com/data".
+    function sendAjaxGetRequest() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://api.example.com/data', true);
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 &&
